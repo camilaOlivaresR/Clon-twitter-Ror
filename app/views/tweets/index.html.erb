@@ -1,20 +1,44 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Tweets</h1>
 
-<%= form_with url: tweets_path, method: :get do |form|%>
-  <%= form.text_field :query_text, placeholder: t('Ingresa tu Busqueda'), value: params[:query_text]%>
-  <%end%>
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <h1 class="navbar-brand"> <%= link_to "Tweets", tweets_path %></h1>
+    <form class="d-flex" role="search">
+      <%= form_with url: tweets_path, method: :get do |form| %>
+        <%= form.text_field :query_text, placeholder: 'Ingresa tu Busqueda', value: params[:query_text], class:"form-control me-2"%>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+        <%end%>
+    </form>
+  </div>
+</nav>
 
-<div id="tweets">
-  <% @tweets.each do |tweet| %>
-    <%= render tweet %>
-    <p>
-      <%= link_to "Show this tweet", tweet %>
-    </p>
-  <% end %>
-</div>
+
+
 
 <%= link_to "New tweet", new_tweet_path %>
 
+
 <%=raw pagy_nav(@pagy)%> 
+
+<div class="container">
+   <% @tweets.each do |tweet| %>
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-3">
+      <img src="/assets/icon.jpg" class="rounded-circle w-100 p-3" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Name: <%= tweet.username %></h5>
+        <p class="card-text"><%= tweet.description %></p>
+        <p class="card-text"><small> <%= link_to "Show this tweet", tweet ,class:"text-body-secondary" %></small></p>   
+      </div>
+    </div>
+  </div> 
+</div>
+    <% end %>
+
+
+
+

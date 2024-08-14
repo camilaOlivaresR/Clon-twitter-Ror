@@ -8,6 +8,6 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 30.times do |i|
-    @tweets = Tweet.create(username: Faker::Lorem.word , description: Faker::Lorem.paragraph)
+    @tweets = Tweet.create(username: Faker::Twitter.user[:name] , description: Faker::Lorem.paragraph)
     print @tweets 
 end
